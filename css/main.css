@@ -2,14 +2,14 @@
 .hidden {
     display: none;
 }
-#win-screen {
+#win-screen, #draw-screen {
     display: none;
     background: rgba(10, 46, 54, 0.8);
     margin: 0;
     padding: 0;
     text-align: center;
 }
-#win-screen.show {
+#win-screen.show, #draw-screen.show{
     display: block;
     position: absolute;
     top: 0;
@@ -18,8 +18,8 @@
     min-height: 100vw;
     z-index: 1000;
 }
-#win-screen .container {
-    background: rgba(253, 255, 252, 0.9);
+#win-screen .container, #draw-screen .container {
+    background: rgba(253, 255, 252, 1);
     color: rgba(10, 46, 54, 1);
     padding: 3rem;
     margin-top: 2rem;

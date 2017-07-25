@@ -20,6 +20,7 @@ class TicTacToe {
         this.currentPlayer = null;
         this.gameStatus = null;
         this.winner = null;
+        this.moveCount = 0;
 
         // Grab DOM elements used during play.
         this.startPrompt = document.querySelector('#start-prompt');
@@ -28,6 +29,8 @@ class TicTacToe {
         this.gameboard = document.querySelector('#gameboard');
         this.winScreen = document.querySelector('#win-screen');
         this.winnerIcon = document.querySelector('#winner-icon');
+
+        this.drawScreen = document.querySelector('#draw-screen');
 
         // Initialize an Array representing the board
         this.gameState = [
@@ -65,7 +68,15 @@ class TicTacToe {
                 // Dispatch a win event
                 let winEvent = new Event('win');
                 document.dispatchEvent(winEvent);
+
+                return true; // Return a value to stop processing the additional move count check.
             }
+        }
+        this.moveCount++;
+        console.log(`Reviewed move ${this.moveCount}.`)
+        if (this.moveCount >= 9) {
+            let drawEvent = new Event('draw');
+            document.dispatchEvent(drawEvent);
         }
     }
     recordMove(event){
@@ -83,8 +94,8 @@ class TicTacToe {
         }
         this.currentPlayerIcon.setAttribute('class', `player-icon glyphicon glyphicon-${this.currentPlayer.token}`);
     }
-    setUpListeners(){
-        // Set up event listeners for interactive elements
+    setUpTileListeners(){
+        // Set up event listeners for tiles
         let tileElements = document.querySelectorAll('.tile');
         for (let tile of tileElements) {
             tile.addEventListener('click', handleMove);
@@ -94,6 +105,10 @@ class TicTacToe {
         // Display end game shim
         this.winScreen.setAttribute('class', 'show');
         this.winnerIcon.setAttribute('class', `glyphicon glyphicon-${this.winner.token}`);
+    }
+    showDrawScreen(){
+        // Display end game shim
+        this.drawScreen.setAttribute('class', 'show');
     }
     setUpBoard(){
         // Clear existing gameboard
@@ -120,7 +135,7 @@ class TicTacToe {
             this.gameboard.appendChild(newRow);
         }
 
-        this.setUpListeners();
+        this.setUpTileListeners();
 
     }
     initializeMovePrompt(){
@@ -160,7 +175,10 @@ document.addEventListener('DOMContentLoaded', function(event){
         game.start();
     });
 })
-
 document.addEventListener('win', function(event){
     game.showWinScreen();
+});
+
+document.addEventListener('draw', function(event){
+    game.showDrawScreen();
 });

@@ -40,6 +40,72 @@ happen throughout the game. This is an event-driven architecture, meaning that
 the event signals are what make each part of the game happen. Without them, our
 game would never "do" anything.
 
+### Game Logic
+
+This version of Tic Tac Toe follows a turn-taking pattern that involves just a
+few steps for each turn. Here is the logical flow of the game.
+
+1. Player clicks "Start Game" button. 
+2. Game board is initialized, game state is initialized.
+3. First player is prompted to make a move.
+4. Player selects a tile to claim.
+5. Player's move is saved in the game state.
+6. Player's move is analyzed to see if it "wins" the game.
+7. If the player's move is a winning move, then the game ends by showing the "win" screen.
+8. If the player's move is not a winning move, the game checks to see if there are any more moves left (since the game has only 9 tiles to claim, there can only be 9 moves in a game).
+9. If there are no more possible moves (meaning 9 moves have been completed), then the game ends by showing the "draw" screen.
+10. If there are still some possible moves (meaning fewer than 9 moves have been completed), then the game switches players.
+11. The next player is prompted to move, and the logic in steps 5 thru 10 is repeated.
+
+These steps are translated almost directly into class methods and functions that are triggered by event listeners in the code. There is very little data stored about the game, since the only data that is needed to determine the win state is what tiles each player has claimed. 
+
+The claimed tile data is stored in an array that contains three arrays. At the beginning of the game, the value of this array is initialized to:
+
+```
+this.gameState = [
+   [null, null, null],
+   [null, null, null],
+   [null, null, null]
+];
+```
+This allows us to access the data about each tile using (X, Y) coordinates:
+
+```
+// Tile data can be accessed using X, Y coordinates:
+this.gameState[x][y];
+
+// The top left tile would be:
+this.gameState[0][0];
+
+// The middle tile would be:
+this.gameState[1][1];
+```
+You are provided with a function that evaluates each move to see if it constitutes a win. This is accomplished by storing an array of all possible winning Tic Tac Toe combinations for a 3x3 board. This data looks like:
+
+```
+this.winStates = [
+    [[0,0],[0,1],[0,2]],
+    [[1,0],[1,1],[1,2]],
+    [[2,0],[2,1],[2,2]],
+    [[0,0],[1,0],[2,0]],
+    [[0,1],[1,1],[2,1]],
+    [[0,2],[1,2],[2,2]],
+    [[0,0],[1,1],[2,2]],
+    [[0,2],[1,1],[2,0]]
+];
+```
+This is also an array of arrays, but each array here contains three coordinates. The first array is the winning condition when a player has claimed all tiles in the top row. The next array is the condition when a player has claimed all tiles in the middle row. These coordinates are used to check against the `this.gameState` object to determine whether or not a player has won.
+
+### Important Game Events
+
+The **DOMContentLoaded** event kicks everything off. It causes the game to be initialized and begin.
+
+The **win** event denotes a winning state for one player. It causes the game to end by showing the "win screen".
+
+The **draw** event denotes a draw state for the game: No player can win. It causes the game to end by showing the "draw screen".
+
+The **click** event on a **tile** object causes a player's move to be handled by the game logic (see the list of logic steps above for details about what happens during that process).
+
 ## Basic Requirements
 
 In order to complete this project you will need to fulfill these requirements:

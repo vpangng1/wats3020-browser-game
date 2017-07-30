@@ -123,7 +123,8 @@ class TicTacToe {
 
         // TODO: Claim this spot in the `this.gameState` array for the player.
 
-        // TODO: Set the class on the `event.target` to show the player's token.
+        // TODO: Set the class on the `event.target` to show the player's token. The class
+        // should be: `tile played glyphicon glyphicon-${this.currentPlayer.token}`.
     }
     switchPlayer(){
         // This method handles switching between players after each move.
@@ -152,7 +153,6 @@ class TicTacToe {
 
         // TODO: Use a loop to add a "click" event listener to each tile that
         // will call the `handleMove` function whenever a tile is clicked.
-\
     }
     showWinScreen(){
         // This method displays the end game screen for a Win.
@@ -193,7 +193,7 @@ class TicTacToe {
                 // TODO: Create a new `span` element called `newTile`.
 
                 // TODO: Set the `class` attribute on `newTile` to equal the
-                // placeholder styles ("token glyphicon glyphicon-question-sign").
+                // placeholder styles ("tile glyphicon glyphicon-question-sign").
 
                 // TODO: Set the `data-x` attribute on the `newTile` element
                 // equal to `i`.
@@ -225,6 +225,8 @@ class TicTacToe {
         // TODO: Remove the "hidden" class from the `this.movePrompt` element.
 
         // TODO: Set `this.currentPlayer` equal to `this.player1`.
+        
+        // TODO: Set `this.currentPlayerToken` class equal to `glyphicon glyphicon-${this.currentPlayer.token}`
     }
     start(){
         // This method handles the logic to create a new game. It primarily has

@@ -179,7 +179,6 @@ class TicTacToe {
         // TODO: Create a `for` loop that will loop three times. The counter
         // variable in this loop should be called `i`.
             // TODO: Create a new div element called `newRow
-            let newRow = ;
 
             // TODO: Set the `class` attribute on `newRow` to "row".
 
@@ -188,12 +187,10 @@ class TicTacToe {
             // variable in this loop should be called `j`.
 
                 // TODO: Create a new `div` element called `newCol`.
-                let newCol = ;
 
                 // TODO: Set the `class` attribute on `newCol` to "col-xs-3".
 
                 // TODO: Create a new `span` element called `newTile`.
-                let newTile = ;
 
                 // TODO: Set the `class` attribute on `newTile` to equal the
                 // placeholder styles ("token glyphicon glyphicon-question-sign").
@@ -208,7 +205,6 @@ class TicTacToe {
                 // TODO: Append `newTile` as a child to `newCol`.
 
                 // TODO: Append `newCol` as a child to `newRow`.
-                newRow.appendChild(newCol);
 
             // NOTE: Your second `for` loop should end here.
 
